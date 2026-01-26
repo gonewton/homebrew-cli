@@ -60,13 +60,13 @@ fi
 
 # Extract download URLs and SHA256
 LINUX_GNU_URL=$(echo "$RELEASE_DATA" | jq -r '.assets[] | select(.name | contains("linux-gnu")) | .browser_download_url' | head -1)
-LINUX_GNU_SHA=$(echo "$RELEASE_DATA" | jq -r '.assets[] | select(.name | contains("linux-gnu")) | .browser_download_url' | xargs curl -s | sha256sum | cut -d' ' -f1)
+LINUX_GNU_SHA=$(echo "$RELEASE_DATA" | jq -r '.assets[] | select(.name | contains("linux-gnu")) | .browser_download_url' | head -1 | xargs curl -sL | sha256sum | cut -d' ' -f1)
 
 LINUX_MUSL_URL=$(echo "$RELEASE_DATA" | jq -r '.assets[] | select(.name | contains("linux-musl")) | .browser_download_url' | head -1)
-LINUX_MUSL_SHA=$(echo "$RELEASE_DATA" | jq -r '.assets[] | select(.name | contains("linux-musl")) | .browser_download_url' | xargs curl -s | sha256sum | cut -d' ' -f1)
+LINUX_MUSL_SHA=$(echo "$RELEASE_DATA" | jq -r '.assets[] | select(.name | contains("linux-musl")) | .browser_download_url' | head -1 | xargs curl -sL | sha256sum | cut -d' ' -f1)
 
 WINDOWS_URL=$(echo "$RELEASE_DATA" | jq -r '.assets[] | select(.name | contains("windows")) | .browser_download_url' | head -1)
-WINDOWS_SHA=$(echo "$RELEASE_DATA" | jq -r '.assets[] | select(.name | contains("windows")) | .browser_download_url' | xargs curl -s | sha256sum | cut -d' ' -f1)
+WINDOWS_SHA=$(echo "$RELEASE_DATA" | jq -r '.assets[] | select(.name | contains("windows")) | .browser_download_url' | head -1 | xargs curl -sL | sha256sum | cut -d' ' -f1)
 
 # Detect glibc version (simplified, assume >= 2.38 for GNU)
 GLIBC_VERSION="2.38"

@@ -1,21 +1,12 @@
 class Constraint < Formula
-  desc "A CLI tool for managing project constraints with RFC 2119 compliance"
-  homepage "https://github.com/gonewton/constraints"
-  url "https://github.com/gonewton/constraints/releases/download/v0.1.0/constraint-x86_64-unknown-linux-gnu.tar.gz"
-  sha256 "placeholder_sha256_gnu"
-  version "0.1.0"
-
-  on_linux do
-    if Hardware::CPU.intel?
-      if ENV["HOMEBREW_GLIBC_VERSION"] && Version.new(ENV["HOMEBREW_GLIBC_VERSION"]) < Version.new("2.38")
-        url "https://github.com/gonewton/constraints/releases/download/v0.1.0/constraint-x86_64-unknown-linux-musl.tar.gz"
-        sha256 "placeholder_sha256_musl"
-      end
-    end
-  end
+  desc "Constraint Management CLI tool"
+  homepage "https://github.com/gonewton/constraint"
+  url "https://github.com/gonewton/constraint/releases/download/v0.1.1/constraint-v0.1.1-linux-x86_64"
+  sha256 "237b0e1add055b46b27f2b49130e4f7d6848ad8dc88af32ed9f8a1f41bb8d35a"
+  version "0.1.1"
 
   def install
-    bin.install "constraint"
+    bin.install "constraint-v0.1.1-linux-x86_64" => "constraint"
   end
 
   test do
