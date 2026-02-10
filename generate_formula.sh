@@ -68,9 +68,7 @@ LINUX_MUSL_SHA=$(echo "$RELEASE_DATA" | jq -r '.assets[] | select(.name | contai
 WINDOWS_URL=$(echo "$RELEASE_DATA" | jq -r '.assets[] | select(.name | contains("windows")) | .browser_download_url' | head -1)
 WINDOWS_SHA=$(echo "$RELEASE_DATA" | jq -r '.assets[] | select(.name | contains("windows")) | .browser_download_url' | head -1 | xargs curl -sL | sha256sum | cut -d' ' -f1)
 
-# Detect glibc version (simplified, assume >= 2.38 for GNU)
-GLIBC_VERSION="2.38"
-
+# Use musl for Linux by default so the binary runs on any glibc (avoids GLIBC_2.39 etc.)
 # Generate formula
 FORMULA_FILE="Formula/${TOOL}.rb"
 
@@ -78,16 +76,14 @@ cat > "$FORMULA_FILE" << EOF
 class ${TOOL^} < Formula
   desc "${TOOL^} CLI tool"
   homepage "https://github.com/$REPO"
-  url "$LINUX_GNU_URL"
-  sha256 "$LINUX_GNU_SHA"
+  url "$LINUX_MUSL_URL"
+  sha256 "$LINUX_MUSL_SHA"
   version "$VERSION_CLEAN"
 
   on_linux do
     if Hardware::CPU.intel?
-      if ENV["HOMEBREW_GLIBC_VERSION"] && Version.new(ENV["HOMEBREW_GLIBC_VERSION"]) < Version.new("$GLIBC_VERSION")
-        url "$LINUX_MUSL_URL"
-        sha256 "$LINUX_MUSL_SHA"
-      end
+      url "$LINUX_MUSL_URL"
+      sha256 "$LINUX_MUSL_SHA"
     end
   end
 
