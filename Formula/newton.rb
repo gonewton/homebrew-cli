@@ -1,14 +1,14 @@
 class Newton < Formula
   desc "Newton CLI tool"
   homepage "https://github.com/gonewton/newton"
-  url "https://github.com/gonewton/newton/releases/download/v0.5.86/newton-x86_64-unknown-linux-musl.tar.gz"
-  sha256 "194cc5ea6bc269dc50bc198c475e2c4c501173bb6ec58cac3ba1fb9163368d60"
-  version "0.5.86"
+  url "https://github.com/gonewton/newton/releases/download/v0.5.87/newton-x86_64-unknown-linux-musl.tar.gz"
+  sha256 "93ca1f515fcd9a3710a34fb4e518db1b520880439f1d76b8162ef193d2ce9b11"
+  version "0.5.87"
 
   on_linux do
     if Hardware::CPU.intel?
-      url "https://github.com/gonewton/newton/releases/download/v0.5.86/newton-x86_64-unknown-linux-musl.tar.gz"
-      sha256 "194cc5ea6bc269dc50bc198c475e2c4c501173bb6ec58cac3ba1fb9163368d60"
+      url "https://github.com/gonewton/newton/releases/download/v0.5.87/newton-x86_64-unknown-linux-musl.tar.gz"
+      sha256 "93ca1f515fcd9a3710a34fb4e518db1b520880439f1d76b8162ef193d2ce9b11"
     end
   end
 
